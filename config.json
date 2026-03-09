@@ -1,0 +1,23 @@
+{
+  "botName": "[𝐄𝐗𝐈𝐓-𝐌𝐃]",
+  "ownerName": "Mr-Marco",
+  "ownerNumber": "50941131299",
+  "prefix": ["/", "!"],
+  "logoUrl": "https://i.postimg.cc/MXJp8KJj/Chat-GPT-Image-13-fevr-2026-05-12-20.png",
+  "botLogo": "https://i.postimg.cc/MXJp8KJj/Chat-GPT-Image-13-fevr-2026-05-12-20.png",
+  "channelImage": "https://i.postimg.cc/MXJp8KJj/Chat-GPT-Image-13-fevr-2026-05-12-20.png",
+  "channelLink": "https://whatsapp.com/channel/0029Vb7H84Q6RGJ8RvT6Jn1W",
+  "footer": "╰━❖ © 2026 𝐄𝐗𝐈𝐓-𝐌𝐃 • All Rights Reserved ❖━╯",
+  "fakeQuoted": {
+    "key": {
+      "fromMe": false,
+      "participant": "0@s.whatsapp.net",
+      "remoteJid": "status@broadcast"
+    },
+    "message": {
+      "conversation": "✨ 𝐄𝐗𝐈𝐓-𝐌𝐃"
+    }
+  },
+  "AUTO_READ_STATUS": "true",
+  "privateMode": false
+}
