@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EXIT-MD - Interface</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+/* 🌟 Animations et Glow */
+@keyframes gradient-move {0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+.btn-anim{background:linear-gradient(-45deg,#ee7752,#e73c7e,#23a6d5,#23d5ab);background-size:400% 400%;animation:gradient-move 5s ease infinite;transition:transform 0.3s;}
+.btn-anim:hover{transform:scale(1.05);}
+
+/* Glass & Neon */
+.glass-box{background:rgba(255,255,255,0.05);backdrop-filter:blur(15px);border:1px solid rgba(255,255,255,0.1);box-shadow:0 0 25px rgba(0,255,255,0.15);}
+.neon-btn{position:relative;background:linear-gradient(90deg,#00f0ff,#ff00c8);font-weight:bold;color:white;transition:0.3s ease;box-shadow:0 0 10px #00f0ff,0 0 20px #ff00c8,0 0 30px #aa00ff;}
+.neon-btn:hover{box-shadow:0 0 20px #00f0ff,0 0 40px #ff00c8,0 0 50px #aa00ff;transform:scale(1.03);}
+.pulse-loading{animation:pulseGlow 1s infinite alternate;}
+@keyframes pulseGlow{from{box-shadow:0 0 10px #00f0ff;}to{box-shadow:0 0 25px #ff00c8;}}
+
+/* Progress Ring */
+.progress-ring{position:absolute;top:-6px;left:-6px;width:calc(100% + 12px);height:calc(100% + 12px);border-radius:10px;pointer-events:none;background:conic-gradient(#00f0ff 0deg, transparent 0deg);z-index:-1;box-shadow:0 0 15px #00f0ff,0 0 25px #ff00c8,0 0 35px #aa00ff;animation:pulseRing 1.5s infinite alternate;}
+@keyframes pulseRing{0%{box-shadow:0 0 15px #00f0ff,0 0 25px #ff00c8,0 0 35px #aa00ff;}50%{box-shadow:0 0 25px #00f0ff,0 0 40px #ff00c8,0 0 50px #aa00ff;}100%{box-shadow:0 0 15px #00f0ff,0 0 25px #ff00c8,0 0 35px #aa00ff;}}
+
+/* Input focus glow */
+#user-number:focus {
+    outline: none;
+    box-shadow: 0 0 15px #00f0ff, 0 0 25px #ff00c8;
+    border: 1px solid #00f0ff;
+}
+
+/* Services buttons hover */
+button.w-full.bg-gray-800:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 15px #00f0ff,0 0 25px #ff00c8;
+}
+
+/* Channel image hover */
+#channel-image {
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+#channel-image:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 25px #00f0ff, 0 0 35px #ff00c8;
+}
+
+/* Footer subtle gradient */
+footer {
+    background: linear-gradient(90deg, rgba(0,240,255,0.1), rgba(255,0,200,0.1));
+    padding: 12px 0;
+}
+</style>
+</head>
+<body class="bg-gray-900 text-white font-sans">
+
+<!-- Header / Logo -->
+<div class="flex flex-col items-center pt-10">
+    <img id="bot-logo" src="" class="w-32 h-32 rounded-full border-4 border-pink-500 shadow-lg mb-2">
+    <h1 class="text-4xl font-bold tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-cyan-400">𝐄𝐗𝐈𝐓-𝐌𝐃</h1>
+    <p class="mt-1 text-gray-400 italic">Bienvenue sur l'interface officielle</p>
+</div>
+
+<!-- Boutons WhatsApp / Channel -->
+<div class="flex justify-center gap-4 mt-10 px-4">
+    <a id="btn-whatsapp" href="#" class="btn-anim px-8 py-3 rounded-md font-bold uppercase tracking-tighter">WhatsApp</a>
+    <a id="btn-channel" href="#" class="btn-anim px-8 py-3 rounded-md font-bold uppercase tracking-tighter">Channel</a>
+</div>
+
+<!-- Image Channel -->
+<div class="mt-12 flex justify-center">
+    <div class="w-11/12 max-w-2xl bg-gray-800 p-2 rounded-lg border border-gray-700">
+        <img id="channel-image" src="" class="rounded shadow-2xl w-full object-cover h-48">
+    </div>
+</div>
+
+<!-- Numéro + Pairing -->
+<div class="mt-4 flex justify-center px-4">
+  <div class="w-11/12 max-w-md glass-box rounded-lg p-6 relative">
+    <p class="text-center text-gray-300 mb-3">Coller votre numéro ici (509xxxxxxxxx)</p>
+    <input id="user-number" type="text" placeholder="509xxxxxxxxx" class="w-full p-3 rounded-t-lg bg-gray-800 text-white text-center tracking-widest focus:outline-none" />
+    <div class="relative">
+        <div id="progress-ring" class="progress-ring hidden"></div>
+        <button id="generate-btn" class="w-full p-3 rounded-b-lg neon-btn">Générer le code 🏧</button>
+    </div>
+    <p id="status-msg" class="mt-3 text-center text-sm text-gray-300"></p>
+  </div>
+</div>
+
+<!-- Services -->
+<div class="mt-12 max-w-md mx-auto space-y-4 px-6">
+    <h2 class="text-xl font-semibold border-b border-gray-700 pb-2">Services</h2>
+    <button class="w-full bg-gray-800 hover:bg-blue-600 py-4 px-6 rounded-lg flex justify-between items-center transition">
+        <span>1 - Apk</span><span class="text-xs bg-blue-500 px-2 py-1 rounded">V1.0</span>
+    </button>
+    <button class="w-full bg-gray-800 hover:bg-purple-600 py-4 px-6 rounded-lg flex justify-between items-center transition">
+        <span>2 - Apk</span><span class="text-xs bg-purple-500 px-2 py-1 rounded">V2.0</span>
+    </button>
+    <button class="w-full bg-gray-700 cursor-not-allowed py-4 px-6 rounded-lg text-gray-500 flex justify-between items-center">
+        <span>3 - Coming Soon...</span>
+    </button>
+</div>
+
+<!-- Channel Link -->
+<div class="mt-8 max-w-md mx-auto glass-box p-4 rounded-lg flex flex-col items-center border border-cyan-400">
+    <h3 class="text-lg font-semibold text-cyan-400 mb-2">Rejoignez notre Channel</h3>
+    <p class="text-sm text-gray-300 mb-4 text-center">Pour rester connecté et recevoir toutes les infos, cliquez ci-dessous :</p>
+    <button onclick="window.open('https://whatsapp.com/channel/0029Vb7H84Q6RGJ8RvT6Jn1W','_blank')" class="mt-2 px-6 py-3 bg-cyan-500 hover:bg-cyan-400 text-black rounded font-bold transition w-full">
+        Rejoindre
+    </button>
+</div>
+
+<footer class="mt-20 py-6 text-center text-gray-500 text-sm border-t border-gray-800">
+    © 2026 𝐌𝐫-𝐌𝐚𝐫𝐜𝐨 - All Rights Reserved
+</footer>
+
+<script>
+const generateBtn = document.getElementById("generate-btn");
+const statusMsg = document.getElementById("status-msg");
+const userNumberInput = document.getElementById("user-number");
+const progressRing = document.getElementById("progress-ring");
+const btnWhatsApp = document.getElementById("btn-whatsapp");
+const btnChannel = document.getElementById("btn-channel");
+const botLogo = document.getElementById("bot-logo");
+const channelImage = document.getElementById("channel-image");
+
+let countdownInterval = null;
+let currentCode = null;
+let isGenerating = false;
+let cooldownActive = false;
+
+// Empêche lettres
+userNumberInput.addEventListener("input", ()=>{userNumberInput.value=userNumberInput.value.replace(/[^0-9]/g,"");});
+
+// Charger config avec ownerNumber
+fetch("/config").then(res=>res.json()).then(config=>{
+    botLogo.src=config.logo;
+    channelImage.src=config.channelImage;
+    btnWhatsApp.href=`https://wa.me/${config.ownerNumber}`;
+    btnChannel.href=config.channelLink;
+}).catch(err=>console.error("Erreur récupération config :",err));
+
+function resetButton(){
+    clearInterval(countdownInterval);
+    currentCode=null;
+    cooldownActive=false;
+    isGenerating=false;
+    progressRing.classList.add("hidden");
+    generateBtn.innerHTML="Générer le code 🏧";
+    generateBtn.classList.remove("pulse-loading");
+    generateBtn.disabled=false;
+    generateBtn.onclick=generateCode;
+}
+
+function startCountdown(){
+    let timeLeft=60;
+    cooldownActive=true;
+    progressRing.classList.remove("hidden");
+    countdownInterval=setInterval(()=>{
+        const progress=(60-timeLeft)/60*360;
+        progressRing.style.background=`conic-gradient(#00f0ff ${progress}deg,#ff00c8 ${progress}deg,#aa00ff 360deg)`;
+        generateBtn.innerHTML=`Copier le code (${timeLeft}s) ✅`;
+        timeLeft--;
+        if(timeLeft<0){
+            resetButton();
+            statusMsg.textContent="⏱️ Code expiré.";
+            statusMsg.className="mt-3 text-center text-sm text-yellow-400";
+        }
+    },1000);
+}
+
+async function generateCode(){
+    if(isGenerating||cooldownActive) return;
+    const number=userNumberInput.value.trim();
+    if(!/^509\d{8}$/.test(number)){
+        statusMsg.textContent="📛 Numéro invalide ! Format: 509xxxxxxxxx";
+        statusMsg.className="mt-3 text-center text-sm text-red-400";
+        return;
+    }
+    isGenerating=true;
+    generateBtn.classList.add("pulse-loading");
+    generateBtn.innerHTML="⏳ Génération en cours...";
+    generateBtn.disabled=true;
+    statusMsg.textContent="";
+    try{
+        const res=await fetch("/generate-pairing",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({number})});
+        const data=await res.json();
+        if(data.pairingCode){
+            currentCode=data.pairingCode;
+            statusMsg.textContent=`Votre code : ${currentCode}`;
+            statusMsg.className="mt-3 text-center text-sm text-green-400";
+            generateBtn.classList.remove("pulse-loading");
+            generateBtn.disabled=false;
+            generateBtn.onclick=()=>{navigator.clipboard.writeText(currentCode);statusMsg.textContent="Code copié ✅";};
+            startCountdown();
+        }else{throw new Error();}
+    }catch(err){
+        generateBtn.classList.remove("pulse-loading");
+        generateBtn.innerHTML="Échec ❎";
+        generateBtn.disabled=false;
+        statusMsg.textContent="Échec génération pairing ❎";
+        statusMsg.className="mt-3 text-center text-sm text-red-400";
+        setTimeout(resetButton,3000);
+        console.error(err);
+    }
+}
+
+generateBtn.onclick=generateCode;
+</script>
+</body>
+</html>
